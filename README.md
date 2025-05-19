@@ -10,6 +10,8 @@ To install the library after Git clone, run
 python -m setup develop
 ```
 
+When training large language models with QLoRA you will also need `bitsandbytes`, `peft` and `trl` which are now listed in `requirements.txt`.  These examples rely on the stable `transformers>=4.50` release that adds official Gemma support.
+
 > :warning: **NOTE**: We strongly recommend Python>=3.8 and torch<=1.11 (it is a known issue that torch 1.12 can slow down as much as 3 times).
 
 ## Getting started
@@ -97,6 +99,13 @@ More datasets, epsilon budgets, models, fine-tuning styles, and different hyperp
 
 ## Examples
 The `examples` folder covers tasks on the table-to-text (E2E and DART datasets with GPT2 models), the text classification (SST2/QNLI/QQP/MNLI datasets with BERT/RoBERTa models), and the image classification (CIFAR10/CIFAR100/CelebA datasets with [TIMM](https://github.com/rwightman/pytorch-image-models)/[torchvision](https://github.com/pytorch/vision) models). Detailed `README.md` can be found in each sub-folder. These examples can be used to reproduce the results in [2,3,4,6,8].
+
+### QLoRA with Gemma and DeepSpeed ZeRO-3
+We provide `examples/gemma_qlora_zero3.py` demonstrating how to differentially privately fine-tune the 8B Gemma model using QLoRA. The script relies on `transformers>=4.50`, `trl`, and `peft` together with DeepSpeed ZeRO-3 and requires `bitsandbytes` for 4-bit loading. Run it as
+
+```bash
+python examples/gemma_qlora_zero3.py --dataset <path_to_dataset>
+```
 
 
 ## Citation
